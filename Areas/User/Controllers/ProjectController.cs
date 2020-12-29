@@ -18,6 +18,7 @@ namespace ProjectManagementTool.Areas.User.Controllers
             _db = db;
         }
         
+        // GET
         public async Task<IActionResult> Index()
         {
             return View(await _db.Projects.ToListAsync());
