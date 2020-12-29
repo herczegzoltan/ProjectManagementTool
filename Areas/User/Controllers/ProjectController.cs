@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementTool.Data;
 using ProjectManagementTool.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementTool.Areas.User.Controllers
 {
@@ -31,7 +32,7 @@ namespace ProjectManagementTool.Areas.User.Controllers
             return View();
         }
         
-        // POST -CREATE
+        // POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Project project)
@@ -43,6 +44,24 @@ namespace ProjectManagementTool.Areas.User.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+            return View(project);
+        }
+        
+        // GET - EDIT
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _db.Projects.FindAsync(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
             return View(project);
         }
     }
