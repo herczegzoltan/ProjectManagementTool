@@ -31,14 +31,7 @@
 
         <div class="form-group row">
             <div class="col-5 offset-2">
-                <div class="row">
-                    <div class="col-6">
-                        <input type="submit" class="btn btn-primary form-control" asp-route-id="@Model.Id" value="Update" />
-                    </div>
-                    <div class="col-6">
-                        <a #href asp-action="Index" class="btn btn-primary form-control">Back to List</a>
-                    </div>
-                </div>
+               <partial name="_EditAndBackToListButtonPartial" model="Model.Id"/>
             </div>
         </div>
     </div>
