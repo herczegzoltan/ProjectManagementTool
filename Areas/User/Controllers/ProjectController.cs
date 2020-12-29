@@ -64,5 +64,21 @@ namespace ProjectManagementTool.Areas.User.Controllers
 
             return View(project);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Project project)
+        {
+            // Modify update later!
+            if (ModelState.IsValid)
+            {
+                _db.Update(project);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(project);
+        }
     }
 }
