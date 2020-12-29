@@ -7,8 +7,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectManagementTool.Controllers
+namespace ProjectManagementTool.Areas.User.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
