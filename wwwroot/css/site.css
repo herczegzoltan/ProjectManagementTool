@@ -74,6 +74,13 @@ body {
     background: url('/images/dust_scratches.png');
 }
 
+.backgroundWhite {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
 .backgroundWhiteBorder {
     background-color: white;
     padding: 30px;

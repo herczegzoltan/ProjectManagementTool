@@ -2,8 +2,58 @@
 
 @{
     ViewData["Title"] = "Project Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Project.</h1>
-</div>
+<br/>
+<br/>
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Project List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <h5 class="card-header">Html.DisplayFor(m=>m.item.Title)</h5>
+                <div class="card-body">
+                    <p class="card-text">Html.DisplayFor(m=>m.item.Description)</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <p>No project exists...</p>
+    }
+    </div>
+
+@*<div>
+    @if (Model.Count() > 0)
+{
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <h5 class="card-header">Html.DisplayFor(m=>m.item.Title)</h5>
+            <div class="card-body">
+                <p class="card-text">Html.DisplayFor(m=>m.item.Description)</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No project exists...<p         }
+</div>*@
