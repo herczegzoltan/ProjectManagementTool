@@ -65,11 +65,12 @@ namespace ProjectManagementTool.Areas.User.Controllers
             return View(project);
         }
 
+        // POST - EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Project project)
         {
-            // Modify update later!
+            //TODO Modify update later not update everything!
             if (ModelState.IsValid)
             {
                 _db.Update(project);
@@ -79,6 +80,44 @@ namespace ProjectManagementTool.Areas.User.Controllers
             }
 
             return View(project);
+        }
+
+        // GET - DELETE
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _db.Projects.FindAsync(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return View(project);
+        }
+
+        // POST - DELETE
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirm(int? id)
+        {
+            // TODO Modif to remove all task to!
+            var project = await _db.Projects.FindAsync(id);
+
+            if (project == null)
+            {
+                return View();
+            }
+            
+            _db.Remove(project);
+            
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
