@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementTool.Data;
+using ProjectManagementTool.Models;
 
 namespace ProjectManagementTool.Areas.User.Controllers
 {
@@ -28,6 +29,21 @@ namespace ProjectManagementTool.Areas.User.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        
+        // POST -CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Projects.Add(project);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(project);
         }
     }
 }
