@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementTool.Models
 {
-    public class Task
+    public class IssueItem
     {
         public int Id { get; set; }
         public string Title { get; set; }

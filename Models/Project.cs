@@ -17,6 +17,6 @@ namespace ProjectManagementTool.Models
         public DateTime StartedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string Status { get; set; }
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<IssueItem> IssueItems { get; set; }
     }
 }

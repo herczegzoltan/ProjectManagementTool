@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementTool.Data;
 using ProjectManagementTool.Models;
-using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementTool.Areas.User.Controllers
 {
@@ -14,7 +13,7 @@ namespace ProjectManagementTool.Areas.User.Controllers
     public class ProjectController : Controller
     {
         private readonly ApplicationDbContext _db;
-        
+
         public ProjectController(ApplicationDbContext db)
         {
             _db = db;
