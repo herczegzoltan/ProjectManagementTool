@@ -1,0 +1,35 @@
+﻿@model Project
+@{
+    ViewData["Title"] = "Task Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h5>Task</h5>
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Project List</h2>
+        </div>
+        <div class="col-6 text-right">
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Tasks.Any())
+    {
+        @foreach (var item in Model.Tasks)
+        {
+            <div class="card">
+                <h5 class="card-header">@Html.DisplayFor(m=>item.Title)</h5>
+                <div class="card-body">
+                    <p class="card-text">@Html.DisplayFor(m=>item.Description)</p>
+                </div>
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <p>No task exists...</p>
+    }
+</div>
