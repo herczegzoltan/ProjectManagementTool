@@ -1,4 +1,4 @@
-﻿@model Project
+﻿@model ProjectManagementTool.Models.ViewModels.IssueItemViewModel
 @{
     ViewData["Title"] = "Task Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,16 +8,26 @@
 <div class="border backgroundWhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Project List</h2>
+            <h2 class="text-info">Task List</h2>
         </div>
         <div class="col-6 text-right">
         </div>
     </div>
     <br />
+    
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Project List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+    <br />
 
-    @if (Model.Tasks.Any())
+    @if (Model.IssueItems.Any())
     {
-        @foreach (var item in Model.Tasks)
+        @foreach (var item in Model.Project.IssueItems)
         {
             var collapseId = "collapseOne" + item.Id;
 
