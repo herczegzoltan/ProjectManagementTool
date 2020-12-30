@@ -19,10 +19,19 @@
     {
         @foreach (var item in Model.Tasks)
         {
-            <div class="card">
-                <h5 class="card-header">@Html.DisplayFor(m=>item.Title)</h5>
-                <div class="card-body">
-                    <p class="card-text">@Html.DisplayFor(m=>item.Description)</p>
+            var collapseId = "collapseOne" + item.Id;
+
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#@{@collapseId}" aria-expanded="true" aria-controls="@{@collapseId}">@Html.DisplayFor(m => item.Title)</button>
+                        </h5>
+                    </div>
+
+                    <div id="@{@collapseId}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">@Html.DisplayFor(m => item.Description)</div>
+                    </div>
                 </div>
             </div>
             <br />
@@ -32,4 +41,5 @@
     {
         <p>No task exists...</p>
     }
+
 </div>
