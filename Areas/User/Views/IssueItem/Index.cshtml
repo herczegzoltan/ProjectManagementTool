@@ -3,7 +3,9 @@
     ViewData["Title"] = "Task Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h5>Task</h5>
+
+<br />
+<br />
 
 <div class="border backgroundWhite">
     <div class="row">
@@ -11,23 +13,15 @@
             <h2 class="text-info">Task List</h2>
         </div>
         <div class="col-6 text-right">
-        </div>
-    </div>
-    <br />
-    
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-info">Project List</h2>
-        </div>
-        <div class="col-6 text-right">
             <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+            <a href# asp-action="Index" asp-controller="Project" class="btn btn-primary">Back to Projects</a>
         </div>
     </div>
     <br />
 
     @if (Model.IssueItems.Any())
     {
-        @foreach (var item in Model.Project.IssueItems)
+        @foreach (var item in Model.IssueItems)
         {
             var collapseId = "collapseOne" + item.Id;
 
@@ -36,6 +30,7 @@
                     <div class="card-header">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#@{@collapseId}" aria-expanded="true" aria-controls="@{@collapseId}">@Html.DisplayFor(m => item.Title)</button>
+                            <partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id" />
                         </h5>
                     </div>
 

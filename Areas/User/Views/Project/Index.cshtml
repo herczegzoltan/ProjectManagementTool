@@ -21,20 +21,22 @@
 
     @if (Model.Any())
     {
-        @foreach (var item in Model)
-        {
-            <div class="card">
-                <h5 class="card-header">@Html.DisplayFor(m=>item.Title)</h5>
-                <div class="card-body">
-                    <p class="card-text">@Html.DisplayFor(m=>item.Description)</p>
-                    <partial name="_LoadTaskEditDeleteButtonsPartial" model="item.Id"/>
-                </div>
-            </div>
-            <br />
-        }
+     @foreach (var item in Model)
+     {
+         <div class="card">
+             <h5 class="card-header">
+                 @Html.DisplayFor(m => item.Title)
+                 <partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id"/>
+             </h5>
+             <div class="card-body">
+                 <p class="card-text">@Html.DisplayFor(m => item.Description)</p>
+             </div>
+         </div>
+         <br/>
+     }
     }
     else
     {
         <p>No project exists...</p>
     }
-    </div>
+</div>
