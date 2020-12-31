@@ -12,5 +12,6 @@ namespace ProjectManagementTool.Data
         }
 
         public DbSet<Project> Projects { get; set; }
+        public DbSet<IssueItem> IssueItems { get; set; }
     }
 }

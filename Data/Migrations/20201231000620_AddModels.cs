@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectManagementTool.Data.Migrations
 {
-    public partial class addProjectAndTaskToModel : Migration
+    public partial class AddModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,8 @@ namespace ProjectManagementTool.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     StartedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Status = table.Column<string>(nullable: true)
@@ -25,25 +25,25 @@ namespace ProjectManagementTool.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "IssueItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    ProjectId = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
-                    Priority = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: true)
+                    Status = table.Column<string>(nullable: true),
+                    Priority = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.Id);
+                    table.PrimaryKey("PK_IssueItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Task_Projects_ProjectId",
+                        name: "FK_IssueItems_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -51,18 +51,9 @@ namespace ProjectManagementTool.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_ProjectId",
-                table: "Task",
+                name: "IX_IssueItems_ProjectId",
+                table: "IssueItems",
                 column: "ProjectId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Task");
-
-            migrationBuilder.DropTable(
-                name: "Projects");
         }
     }
 }

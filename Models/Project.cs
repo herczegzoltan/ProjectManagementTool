@@ -9,6 +9,7 @@ namespace ProjectManagementTool.Models
 {
     public class Project
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
@@ -17,6 +18,5 @@ namespace ProjectManagementTool.Models
         public DateTime StartedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string Status { get; set; }
-        public ICollection<IssueItem> IssueItems { get; set; }
     }
 }

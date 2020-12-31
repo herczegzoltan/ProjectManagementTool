@@ -236,7 +236,7 @@ namespace ProjectManagementTool.Data.Migrations
                     b.Property<string>("Priority")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -256,7 +256,7 @@ namespace ProjectManagementTool.Data.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("IssueItem");
+                    b.ToTable("IssueItems");
                 });
 
             modelBuilder.Entity("ProjectManagementTool.Models.Project", b =>
@@ -341,9 +341,11 @@ namespace ProjectManagementTool.Data.Migrations
 
             modelBuilder.Entity("ProjectManagementTool.Models.IssueItem", b =>
                 {
-                    b.HasOne("ProjectManagementTool.Models.Project", null)
-                        .WithMany("IssueItems")
-                        .HasForeignKey("ProjectId");
+                    b.HasOne("ProjectManagementTool.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -10,8 +10,8 @@ using ProjectManagementTool.Data;
 namespace ProjectManagementTool.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201229182729_addProjectAndTaskToModel")]
-    partial class addProjectAndTaskToModel
+    [Migration("20201231000620_AddModels")]
+    partial class AddModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,34 +221,7 @@ namespace ProjectManagementTool.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProjectManagementTool.Models.Project", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("ProjectManagementTool.Models.Task", b =>
+            modelBuilder.Entity("ProjectManagementTool.Models.IssueItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,18 +232,20 @@ namespace ProjectManagementTool.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Priority")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
@@ -283,7 +258,36 @@ namespace ProjectManagementTool.Data.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Task");
+                    b.ToTable("IssueItems");
+                });
+
+            modelBuilder.Entity("ProjectManagementTool.Models.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -337,11 +341,13 @@ namespace ProjectManagementTool.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProjectManagementTool.Models.Task", b =>
+            modelBuilder.Entity("ProjectManagementTool.Models.IssueItem", b =>
                 {
-                    b.HasOne("ProjectManagementTool.Models.Project", null)
-                        .WithMany("Tasks")
-                        .HasForeignKey("ProjectId");
+                    b.HasOne("ProjectManagementTool.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
