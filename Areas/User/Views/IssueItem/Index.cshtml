@@ -7,44 +7,44 @@
 <br />
 <br />
 
-<div class="border backgroundWhite">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-info">Task List</h2>
-        </div>
-        <div class="col-6 text-right">
-            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
-            <a href# asp-action="Index" asp-controller="Project" class="btn btn-primary">Back to Projects</a>
-        </div>
+<div class="row">
+    <div class="col-6">
+        <h5 >Your Projects</h5>
     </div>
-    <br />
+    <div class="col-6 text-right">
+        <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+</div>
+<br />
 
-    @if (Model.IssueItems.Any())
-    {
+@if (Model.IssueItems.Any())
+{
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Task Name</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
         @foreach (var item in Model.IssueItems)
         {
-            var collapseId = "collapseOne" + item.Id;
 
-            <div id="accordion">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#@{@collapseId}" aria-expanded="true" aria-controls="@{@collapseId}">@Html.DisplayFor(m => item.Title)</button>
-                            <partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id" />
-                        </h5>
-                    </div>
-
-                    <div id="@{@collapseId}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">@Html.DisplayFor(m => item.Description)</div>
-                    </div>
-                </div>
-            </div>
-            <br />
+            <tr>
+                <td>@Html.DisplayFor(m => item.Title)</td>
+                <td>@Html.DisplayFor(m => item.Description)</td>
+                <td><partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id" /></td>
+            </tr>
         }
-    }
-    else
-    {
-        <p>No task exists...</p>
-    }
+        </tbody>
+    </table>
 
-</div>
+}
+else
+{
+    <p>No record exists...</p>
+}

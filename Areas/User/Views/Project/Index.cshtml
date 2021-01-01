@@ -7,36 +7,46 @@
 
 <br/>
 <br/>
-
-<div class="border backgroundWhite">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-info">Project List</h2>
+    
+        <div class="row">
+            <div class="col-6">
+                <h5 >Your Projects</h5>
+            </div>
+            <div class="col-6 text-right">
+                <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+            </div>
         </div>
-        <div class="col-6 text-right">
-            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
-        </div>
-    </div>
-    <br />
+        <br />
 
-    @if (Model.Any())
-    {
-     @foreach (var item in Model)
-     {
-         <div class="card">
-             <h5 class="card-header">
-                 @Html.DisplayFor(m => item.Title)
-                 <partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id"/>
-             </h5>
-             <div class="card-body">
-                 <p class="card-text">@Html.DisplayFor(m => item.Description)</p>
-             </div>
-         </div>
-         <br/>
-     }
-    }
-    else
-    {
-        <p>No project exists...</p>
-    }
-</div>
+        @if (Model.Any())
+        {
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Title)</td>
+                            <td>@Html.DisplayFor(m => item.Description)</td>
+                            <td><partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <p>No project exists...</p>
+        }
+
