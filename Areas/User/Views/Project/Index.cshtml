@@ -4,21 +4,19 @@
     ViewData["Title"] = "Project Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container-fluid">
 
-<br/>
-<br/>
-    
-        <div class="row">
-            <div class="col-6">
-                <h5 >Your Projects</h5>
-            </div>
-            <div class="col-6 text-right">
-                <a href# asp-action="Create" class="btn btn-primary">Create New</a>
-            </div>
+    <div class="row">
+        <div class="col-6">
+            <h5>Your Projects</h5>
         </div>
-        <br />
+        <div class="col-6 text-right">
+            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
 
-        @if (Model.Any())
+
+    @*@if (Model.Any())
         {
 
             <table class="table">
@@ -48,5 +46,33 @@
         else
         {
             <p>No project exists...</p>
-        }
+        }*@
 
+
+
+
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">@Html.DisplayFor(m => item.Title)</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">"some info like statistics"</h5>
+                            <p class="card-text">@Html.DisplayFor(m => item.Description)</p>
+                            <partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            }
+        </div>
+
+    }
+    else
+    {
+        <p>No project exists...</p>
+    }
+    </div>

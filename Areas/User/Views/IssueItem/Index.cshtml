@@ -9,7 +9,6 @@
 
 <div class="row">
     <div class="col-6">
-        <h5 >Your Projects</h5>
     </div>
     <div class="col-6 text-right">
         <a href# asp-action="Create" class="btn btn-primary">Create New</a>
@@ -17,34 +16,49 @@
 </div>
 <br />
 
-@if (Model.IssueItems.Any())
-{
+<div>
+    <div class="card">
+        <h5 class="card-header">Details For xx project</h5>
+        <div class="card-body">
+            @*<h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>*@
+            <br/>
+            @if (Model.IssueItems.Any())
+            {
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Task Name</th>
-            <th scope="col">Description</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
 
-        @foreach (var item in Model.IssueItems)
-        {
+                    @foreach (var item in Model.IssueItems)
+                    {
 
-            <tr>
-                <td>@Html.DisplayFor(m => item.Title)</td>
-                <td>@Html.DisplayFor(m => item.Description)</td>
-                <td><partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id" /></td>
-            </tr>
-        }
-        </tbody>
-    </table>
+                        <tr>
+                            <td asp-for="Type" asp-items="Html.GetEnumSelectList<IssueItem.EType>()"> @Html.DisplayFor(m => item.Title)</td>
+                            <td>@Html.DisplayFor(m => item.Status)</td>
+                            <td>@Html.DisplayFor(m => item.Type)</td>
+                            <td><partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id"/></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
 
-}
-else
-{
-    <p>No record exists...</p>
-}
+            }
+            else
+            {
+                <p>No record exists...</p>
+            }
+        </div>
+    </div>
+    
+    
+</div>
+
