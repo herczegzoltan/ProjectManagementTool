@@ -51,7 +51,19 @@
                     <span>My Projects</span>
                 </a>
             </li>
-            
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Privacy -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>My Tickets</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -129,7 +141,6 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     @RenderBody()
                 </div>
             </div>
@@ -169,6 +180,7 @@
 <script src="~/theme/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="~/theme/js/sb-admin-2.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/jpz9uvsx8vpdl3k65v5qkeqfudh53w9fz6eob14k691bzpin/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 @RenderSection("Scripts", required: false)
 </body>
 </html>
