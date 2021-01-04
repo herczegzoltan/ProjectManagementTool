@@ -4,75 +4,51 @@
     ViewData["Title"] = "Project Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
 
-    <div class="row">
-        <div class="col-6">
-            <h5>Your Projects</h5>
+<a href# asp-action="Create" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-flag"></i>
+    </span>
+    <span class="text">Create New Project</span>
+</a>
+<br />
+<br />
+@if (Model.Any())
+{
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Your Projects</h6>
         </div>
-        <div class="col-6 text-right">
-            <a href# asp-action="Create" class="btn btn-primary">Create New</a>
-        </div>
-    </div>
-
-
-    @*@if (Model.Any())
-        {
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Project Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    @foreach (var item in Model)
-                    {
-
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
-                            <td>@Html.DisplayFor(m => item.Title)</td>
-                            <td>@Html.DisplayFor(m => item.Description)</td>
-                            <td><partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id" /></td>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Started Date</th>
+                            <th>Updated Date</th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-
-        }
-        else
-        {
-            <p>No project exists...</p>
-        }*@
-
-
-
-
-    @if (Model.Any())
-    {
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-6">
-                    <div class="card">
-                        <h5 class="card-header">@Html.DisplayFor(m => item.Title)</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">"some info like statistics"</h5>
-                            <p class="card-text">@Html.DisplayFor(m => item.Description)</p>
-                            <partial name="project/_LoadItemsEditDeleteButtonsPartial" model="item.Id" />
-                        </div>
-                    </div>
-                    <br />
-                </div>
-            }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Title)</td>
+                                <td>@Html.DisplayFor(m => item.Description)</td>
+                                <td>@Html.DisplayFor(m => item.StartedDate)</td>
+                                <td>@Html.DisplayFor(m => item.UpdatedDate)</td>
+                                <td style="text-align: center; vertical-align: middle;"><partial name="project/_MoreDetails" model="item.Id" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-    }
-    else
-    {
-        <p>No project exists...</p>
-    }
     </div>
+}
+else
+{
+    <p>No project exists...</p>
+}

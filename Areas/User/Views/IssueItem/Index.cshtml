@@ -1,64 +1,98 @@
-﻿@model ProjectManagementTool.Models.ViewModels.IssueItemViewModel
+﻿@using ProjectManagementTool.Extensions
+@using System.ComponentModel.DataAnnotations
+@model ProjectManagementTool.Models.ViewModels.IssueItemViewModel
 @{
     ViewData["Title"] = "Task Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<a href# asp-action="Create" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-flag"></i>
+    </span>
+    <span class="text">Create New Ticket</span>
+</a>
 <br />
 <br />
 
-<div class="row">
-    <div class="col-6">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Details for @Model.Project.Title</h6>
+        <br/>
+        <partial name="project/_EditAndBackToProjects" model="Model.Project.Id" style="text-align: right; vertical-align: middle;"/>
     </div>
-    <div class="col-6 text-right">
-        <a href# asp-action="Create" class="btn btn-primary">Create New</a>
-    </div>
-</div>
-<br />
+    <div class="card-body">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Earnings (Annual)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div>
-    <div class="card">
-        <h5 class="card-header">Details For xx project</h5>
-        <div class="card-body">
-            @*<h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>*@
-            <br/>
-            @if (Model.IssueItems.Any())
-            {
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Description</th>
-                        <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    @foreach (var item in Model.IssueItems)
-                    {
-
-                        <tr>
-                            <td asp-for="Type" asp-items="Html.GetEnumSelectList<IssueItem.EType>()"> @Html.DisplayFor(m => item.Title)</td>
-                            <td>@Html.DisplayFor(m => item.Status)</td>
-                            <td>@Html.DisplayFor(m => item.Type)</td>
-                            <td><partial name="issueitem/_EditAndDeleteButtonPartial" model="item.Id"/></td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-
-            }
-            else
-            {
-                <p>No record exists...</p>
-            }
+        <div class="row">
+            <div class="col">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Statistics for this Project</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">Future statistics will be implemented here.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Tickets for this Project</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if (Model.IssueItems.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>State</th>
+                                            <th>Priority</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.IssueItems)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(m => item.Title)</td>
+                                                <td>@Html.DisplayFor(m => item.Description)</td>
+                                                <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EType), Int32.Parse(item.Type)))</td>
+                                                <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EStatus), Int32.Parse(item.Status)))</td>
+                                                <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EPriority), Int32.Parse(item.Priority)))</td>
+                                                <td style="text-align: center; vertical-align: middle;"><partial name="issueitem/_MoreDetails" model="item.Id"/></td>
+                                            </tr>
+                                        }   
+                                </tbody>
+                            </table>
+                        </div>
+                        }
+                        else
+                        {
+                            <p>No record exists...</p>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
 </div>
-

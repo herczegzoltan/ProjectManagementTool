@@ -1,0 +1,15 @@
+﻿@model int
+
+<a #href asp-action="Edit" asp-controller="IssueItem" asp-route-id="@Model" class="btn btn-success btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-edit"></i>
+    </span>
+    <span class="text">Edit Ticket</span>
+</a>
+
+<a #href asp-action="Index" asp-controller="IssueItem" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-chevron-left"></i>
+    </span>
+    <span class="text">Back to Project</span>
+</a>

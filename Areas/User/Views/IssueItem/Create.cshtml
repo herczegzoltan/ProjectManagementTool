@@ -6,82 +6,87 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create New Task..</h1>
-
 <form method="post" asp-action="Create">
-    <div class="border backgroundWhite">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Title" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Title" class="form-control" />
-            </div>
-            <span asp-validation-for="Title" class="text-danger"></span>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Create new ticket for PROJECTXXX</h6>
         </div>
-        
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Description" class="col-form-label"></label>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Title" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Title" class="form-control" />
+                </div>
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="col-5">
-                <textarea asp-for="Description" class="form-control" rows="3" style="min-height: 150px;"></textarea>
-            </div>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        
 
-        @*<div class="form-group row">
-            <div class="col-2">
-                <label asp-for="MenuItem.Image" class="col-form-label"></label>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Description" class="col-form-label"></label>
+                </div>
+                <div class="col">
+                    <textarea asp-for="Description" class="form-control" rows="12"></textarea>
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="col-5">
-                <input type="file" name="files" multiple class="form-control" />
-            </div>
-        </div>*@
 
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Type" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <select asp-for="Type" asp-items="Html.GetEnumSelectList<IssueItem.EType>()" class="form-control"></select>
-            </div>
-        </div>
-        
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Priority" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <select asp-for="Priority" asp-items="Html.GetEnumSelectList<IssueItem.EPriority>()" class="form-control"></select>
-            </div>
-        </div>
-        
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Status" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <select asp-for="Status" asp-items="Html.GetEnumSelectList<IssueItem.EStatus>()" class="form-control"></select>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-5 offset-2">
-                <div class="row">
-                    <div class="col-6">
-                        <input type="submit" class="btn btn-primary form-control" value="Create"/>
+            @*<div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="MenuItem.Image" class="col-form-label"></label>
                     </div>
-                    <div class="col-6">
-                        <a #href asp-action="Index" class="btn btn-primary form-control">Back to List</a>
+                    <div class="col-5">
+                        <input type="file" name="files" multiple class="form-control" />
                     </div>
+                </div>*@
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Type" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<IssueItem.EType>()" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Priority" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="Priority" asp-items="Html.GetEnumSelectList<IssueItem.EPriority>()" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Status" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="Status" asp-items="Html.GetEnumSelectList<IssueItem.EStatus>()" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-5 offset-2">
+                    <partial name="issueitem/_CreateAndBackToProject"/>
+
+                    @*<div class="row">
+                        <div class="col-6">
+                            <input type="submit" class="btn btn-primary form-control" value="Create" />
+                        </div>
+                        <div class="col-6">
+                            <a #href asp-action="Index" class="btn btn-primary form-control">Back to List</a>
+                        </div>
+                    </div>*@
                 </div>
             </div>
         </div>
     </div>
 </form>
+
 
 @section Scripts{
     <script>

@@ -1,0 +1,78 @@
+﻿@using ProjectManagementTool.Extensions
+@using Microsoft.CodeAnalysis
+@model IssueItem
+@{
+    ViewData["Title"] = "Edit Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Edit @Model.Title Ticket</h6>
+        <br/>
+        <partial name="issueitem/_EditAndBackToProject" model="Model.Id" style="text-align: right; vertical-align: middle;"/>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table-borderless" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.Title)</td>
+                        <td>@Html.DisplayFor(m => m.Description)</td>
+                <tr>
+                <tr>
+                    <td colspan="2"><hr/></td>
+                </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EType), Int32.Parse(Model.Type)))</td>
+                <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EPriority), Int32.Parse(Model.Priority)))</td>
+                <tr>
+                    <td colspan="2"><hr/></td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr>
+                    <th>State</th>
+                    <th>Something</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>@Html.DisplayName(@Enum.GetName(typeof(IssueItem.EStatus), Int32.Parse(Model.Status)))</td>
+                    <td>Something</td>
+                <tr>
+                <tr>
+                    <td colspan="2"><hr/></td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr>
+                    <th>Created</th>
+                    <th>Updated</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(m => m.CreatedDate)</td>
+                    <td>@Html.DisplayFor(m => m.UpdatedDate)</td>
+                <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
