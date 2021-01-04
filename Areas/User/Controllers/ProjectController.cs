@@ -24,7 +24,7 @@ namespace ProjectManagementTool.Areas.User.Controllers
         {
             return View(await _db.Projects.ToListAsync());
         }
-
+                
         // GET - CREATE
         public IActionResult Create()
         {
